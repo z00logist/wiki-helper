@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "wiki-helper"
+version = "0.1.0"
+description = ""
+authors = ["Anastasia margoanastasija27@gmail.com"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "wiki_helper"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+yarl = "^1.11.1"
+wikipedia-api = "^0.7.1"
+boto3 = "^1.35.24"
+pymilvus = "^2.4.7"
+transformers = "^4.45.0"
+llama-cpp-python = "^0.3.0"
+llama-index-vector-stores-chroma = "^0.2.0"
+pydantic-settings = "^2.5.2"
+pydantic = "^2.9.2"
+langchain = "^0.3.1"
+langchain-community = "^0.3.1"
+llama-index-embeddings-huggingface = "^0.3.1"
+ipywidgets = "^8.1.5"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.7"
+pytest = "^8.3.3"
+mypy = "^1.11.2"
+ipykernel = "^6.29.5"
+
+
+[tool.mypy]
+files = ["src/", "tests/"]
+strict = true
+plugins = [
+    "pydantic.mypy",
+]
+enable_error_code = [
+    "possibly-undefined",
+]
+
+[[tool.mypy.overrides]]
+module = ["wikipediaapi.*"]
+ignore_missing_imports = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
