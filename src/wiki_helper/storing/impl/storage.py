@@ -22,7 +22,7 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
         self,
         embedding_builder: BaseEmbedding,
         connection_settings: VectorStorageConnection,
-    ):
+    ) -> None:
         self.__embedding_function = embedding_builder
         self.__num_neighbors = 5
         self.__chroma_client = chromadb.HttpClient(

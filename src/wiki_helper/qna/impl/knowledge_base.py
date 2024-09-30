@@ -1,7 +1,7 @@
 import wikipediaapi
 from yarl import URL
 
-from wiki_helper.knowledge_base.knowledge_base import KnowledgeBase, KnowledgeBaseError
+from wiki_helper.qna.knowledge_base import KnowledgeBase, KnowledgeBaseError
 
 
 class ExternalKnowledgeBase(KnowledgeBase[URL, str]):

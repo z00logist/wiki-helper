@@ -5,7 +5,7 @@ import typing as t
 from langchain.prompts.prompt import PromptTemplate
 from langchain_community.llms import LlamaCpp
 
-from wiki_helper.rag.generative_model import GenerativeModel, GenerativeModelError
+from wiki_helper.qna.generative_model import GenerativeModel, GenerativeModelError
 
 
 @dc.dataclass(frozen=True)

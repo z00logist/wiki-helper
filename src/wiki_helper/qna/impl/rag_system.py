@@ -2,11 +2,11 @@ import typing as t
 
 from yarl import URL
 
-from wiki_helper.knowledge_base.knowledge_base import KnowledgeBase, KnowledgeBaseError
-from wiki_helper.rag.generative_model import GenerativeModel, GenerativeModelError
-from wiki_helper.rag.impl.generative_model import QnAContext
+from wiki_helper.qna.knowledge_base import KnowledgeBase, KnowledgeBaseError
+from wiki_helper.qna.generative_model import GenerativeModel, GenerativeModelError
+from wiki_helper.qna.impl.generative_model import QnAContext
 from wiki_helper.storing.storage import Storage, StorageError
-from wiki_helper.system.rag_system import RagSystem, RagSystemError
+from wiki_helper.qna.rag_system import RagSystem, RagSystemError
 
 
 class RagSystemImpl(RagSystem):
