@@ -40,7 +40,7 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
             chroma_collection = self.__chroma_client.get_or_create_collection(
                 self.__collection_name
             )
-
+            # TODO: change to logging
             if not self.__collection_is_empty():
                 print(f"Updating existing collection: {self.__collection_name}")
             else:
