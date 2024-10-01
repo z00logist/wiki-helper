@@ -50,6 +50,5 @@ def setup_logger() -> logging.Logger:
     )
 
     logger = logging.getLogger(__name__)
-    logger.info("Logger configured successfully.")
 
     return logger
