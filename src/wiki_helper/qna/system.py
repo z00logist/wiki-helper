@@ -15,3 +15,7 @@ class RagSystem(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def answer(self, query: str) -> str:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def delete(self) -> None:
+        raise NotImplementedError

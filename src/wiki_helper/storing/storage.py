@@ -18,3 +18,7 @@ class Storage(t.Generic[TI, TO], metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get(self, key: TI) -> TO:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def clear(self) -> None:
+        raise NotImplementedError
