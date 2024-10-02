@@ -3,6 +3,7 @@ version: '3.9'
 networks:
   net:
     driver: bridge
+
 services:
   chromadb:
     image: chromadb/chroma:latest
