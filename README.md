@@ -1,5 +1,5 @@
 # Wiki Helper
-    Wiki Helper is a RAG powered QnA service. It is aimed to run locally on one's machine: either in the form of FastApi sevice or in the form of library in Jupyter Notebook.
+Wiki Helper is a RAG powered QnA service. It is aimed to run locally on one's machine: either in the form of FastApi sevice or in the form of library in Jupyter Notebook.
 
 ## The Concept
 
