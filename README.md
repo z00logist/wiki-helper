@@ -32,4 +32,4 @@ Request parameters:
 **Question**   
 
 For example: 
-``curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
+```curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
