@@ -13,7 +13,7 @@ Current Concept of the project is simple:
 ## Locally
 ### Run Service
 
-1. Install environment ```poetry install --no-root```
+1. Install environment ```poetry install --no-root```  
 1.1. You may need to add src into PYTHONPATH ```export PYTHONPATH=src```
 2. Run chromadb ```docker compose up -d```
 3. Run service ```python -m wiki_helper```
