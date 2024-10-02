@@ -21,6 +21,15 @@ Current Concept of the project is simple:
 ### Use Service
 #### Train Method
 You need to request api methods training/train and provide it with the json containing url of wikipedia article.
+Request parameters:
+**URL**   
 
+For example: 
+```curl -X POST "http://0.0.0.0:8080/training/train" -H "Content-Type: application/json" -d "{\"url\": \"https://en.wikipedia.org/wiki/Programming_language\"}"```
 #### Answer Method
 Now, you trained your model and can ask it questions. You need to request api methods inference/answer and provide it with the json containing question.
+Request parameters:
+**Question**   
+
+For example: 
+``curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
