@@ -23,7 +23,7 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
         self.__model = LlamaCpp(
             model_path=model_location.as_posix(),
             temperature=0.8,
-            max_tokens=200,
+            max_tokens=300,
             n_ctx=3048,
             seed=-1,
             n_threads=8,
@@ -56,7 +56,7 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
 
         logger.debug(f"Generated prompt for model: {prompt}")
 
-        result = self.__model.invoke(prompt)
+        result = self.__model.invoke(prompt, stop=["<|eot_id|>"])
 
         logger.info("Answer generated successfully.")
 
