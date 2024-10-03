@@ -11,10 +11,13 @@ Current Concept of the project is simple:
 
 # Usage
 ## Locally
-### Run Service
+### Preparation
 
 1. Install environment ```poetry install --no-root```  
-1.1. You may need to add src into PYTHONPATH ```export PYTHONPATH=src```
+2. Download baseline models: ```sh /resources/download-models.sh```
+
+### Run the Service
+0. You may need to add src into PYTHONPATH ```export PYTHONPATH=src```
 2. Run chromadb ```docker compose up -d```
 3. Run service ```python -m wiki_helper```
 
@@ -33,3 +36,12 @@ Request parameters:
 
 For example: 
 ```curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
+
+## Via Jupter Notebook
+### Preparation
+
+1. Install environment ```poetry install --no-root```  
+2. Download baseline models: ```sh /resources/download-models.sh```
+
+### Use Notebook
+You can find the example of usage in [examples/](examples)
