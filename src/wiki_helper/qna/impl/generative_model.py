@@ -22,7 +22,7 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
         logger.info(f"Initializing model from location: '{model_location}'")
         self.__model = LlamaCpp(
             model_path=model_location.as_posix(),
-            temperature=0.8,
+            temperature=0.4,
             max_tokens=300,
             n_ctx=3048,
             seed=-1,
