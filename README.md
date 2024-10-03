@@ -41,7 +41,7 @@ For example:
 ### Preparation
 
 1. Install environment ```poetry install --no-root```  
-2. Download baseline models: ```sh /resources/download-models.sh```
+2. Download baseline models: ```/resources/download-models.sh```
 
 ### Use Notebook
 You can find the example of usage in [examples/](examples)
