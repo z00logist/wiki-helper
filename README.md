@@ -7,7 +7,7 @@ Current Concept of the project is simple:
 1. You choose the topic of your interest, find the corresponding URL on Wikipedia and send it to service. Thus, you get the traineed model.
 2. Optionally, you can add another article to your knowledge base, if you want to widen the system.
 3. If you want to train a new one, you need to delete previous.
-**Note**: Beware, that the service currently supports only one QnA agent at the time.
+**Note**: Beware, that the service currently supports only one QnA agent **in English** at the time. 
 
 # Usage
 ## Locally
