@@ -1,6 +1,7 @@
-from fastapi import APIRouter
-from fastapi.requests import Request
+from fastapi import APIRouter, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+
 
 answer_router = APIRouter(prefix="/inference")
 
@@ -9,13 +10,9 @@ class AnswerRequest(BaseModel):
     question: str
 
 
-class AnswerResponse(BaseModel):
-    answer: str
-
-
-@answer_router.post("/answer", response_model=AnswerResponse)
-def handle_answer(request: AnswerRequest, request_meta: Request) -> AnswerResponse:
+@answer_router.post("/answer")
+def handle_answer(request: AnswerRequest, request_meta: Request) -> StreamingResponse:
     qna_system = request_meta.app.state.system
-    answer = qna_system.answer(request.question)
+    query = request.question
 
-    return AnswerResponse(answer=answer)
+    return StreamingResponse(qna_system.answer(query), media_type="text/plain")

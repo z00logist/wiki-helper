@@ -1,12 +1,13 @@
 import pathlib as pth
+import typing as t
 
 from llama_index.core.base.embeddings.base import BaseEmbedding
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 from wiki_helper.configuration import Configuration
-from wiki_helper.qna.impl.generative_model import LargeLanguageModel
+from wiki_helper.qna.impl.generative_model import StreamingLanguageModel
 from wiki_helper.qna.impl.knowledge_base import ExternalKnowledgeBase
-from wiki_helper.qna.impl.system import RagSystemImpl
+from wiki_helper.qna.impl.system import StreamingRagSystem
 from wiki_helper.qna.system import RagSystem
 from wiki_helper.storing.impl.storage import VectorStorage, VectorStorageConnection
 
@@ -19,9 +20,11 @@ def build_embedding_creator(embedder_location: pth.Path) -> BaseEmbedding:
     )
 
 
-def build_system(configuration: Configuration) -> RagSystem:
-    return RagSystemImpl(
-        generator=LargeLanguageModel(model_location=configuration.llm.location),
+def build_system(
+    configuration: Configuration,
+) -> RagSystem[t.Iterator[str]]:
+    return StreamingRagSystem(
+        generator=StreamingLanguageModel(model_location=configuration.llm.location),
         knowledge_base=ExternalKnowledgeBase(configuration.language),
         storage=VectorStorage(
             embedding_builder=build_embedding_creator(configuration.embedder.location),

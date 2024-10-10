@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
+from fastapi.middleware.cors import CORSMiddleware
 
 from wiki_helper.configuration import Configuration
 from wiki_helper.logger import setup_logger
@@ -25,6 +26,14 @@ def initialize_service(configuration: Configuration) -> FastAPI:
     service.include_router(router=answer_router)
     service.include_router(router=train_router)
     service.include_router(router=deletion_router)
+
+    service.add_middleware(
+        CORSMiddleware,
+        allow_origins=["https://en.wikipedia.org"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     service.add_exception_handler(Exception, error_handler)
 

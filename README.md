@@ -1,47 +1,55 @@
 # Wiki Helper
-Wiki Helper is a RAG-powered QnA service. It is aimed to run locally on one's machine: either in the form of FastApi sevice or in the form of library in Jupyter Notebook.
 
-## The Concept
+Wiki Helper Widget is a Q&A bot designed specifically for Wikipedia. It allows you to interact with a trained model directly within Wikipedia pages, providing answers based on the content of the article you’re reading. This widget makes it easy to get quick answers without leaving the page.
 
-Current Concept of the project is simple: 
-1. You choose the topic of your interest, find the corresponding URL on Wikipedia and send it to service. Thus, you get the traineed model.
-2. Optionally, you can add another article to your knowledge base, if you want to widen the system.
-3. If you want to train a new one, you need to delete previous.
-**Note**: Beware, that the service currently supports only one QnA agent **in English** at the time. 
+## Features:
+- **Automatic model training** based on the Wikipedia article you are viewing.
+- **Ask questions** directly related to the article content.
+- **Seamless experience** with a toggle button for quick access.
 
-# Usage
-## Locally
-### Preparation
+### Notes
+- This widget only works within **Wikipedia** pages.
+- Currently, it supports only **English language** Q&A.
 
-1. Install environment ```poetry install --no-root```  
-2. Download baseline models: ```sh /resources/download-models.sh```
+## Installation Guide
 
-### Run the Service
-0. You may need to add src into PYTHONPATH ```export PYTHONPATH=src```
-2. Run chromadb ```docker compose up -d```
-3. Run service ```python -m wiki_helper```
+### Step 0: Run the service
+1. Clone this repository on your computer.
+2. Prepare your environment via `make prepare`.
+3. Run the service via `make run`.
 
-### Use Service
-#### Train
-You need to request api methods training/train and provide it with the json containing url of wikipedia article.
-Request parameters:
-**URL**   
+### Step 1: Install the Chrome Extension
 
-For example: 
-```curl -X POST "http://0.0.0.0:8080/training/train" -H "Content-Type: application/json" -d "{\"url\": \"https://en.wikipedia.org/wiki/Programming_language\"}"```
-#### Answer
-Now, you trained your model and can ask it questions. You need to request api methods inference/answer and provide it with the json containing question.
-Request parameters:
-**Question**   
+1. Open Chrome and go to the `Extensions` page by typing `chrome://extensions/` in your address bar.
+2. Turn on **Developer mode** (toggle in the top right corner).
+3. Click **Load unpacked** and select the folder in this project [widget extension](widget_extension).
+4. You should now see the Wiki Helper icon in your Chrome toolbar.
 
-For example: 
-```curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
+### Step 2: Using the Widget
 
-## Via Jupter Notebook
-### Preparation
+1. **Navigate to any Wikipedia page**.
+2. **Click the Wiki Helper button** (visible in your browser toolbar) to toggle the widget window open. This is a simple interface that will appear on the side of your Wikipedia page.
 
-1. Install environment ```poetry install --no-root```  
-2. Download baseline models: ```/resources/download-models.sh```
+![UI Overview](assets/UI.gif)
 
-### Use Notebook
-You can find the example of usage in [examples/](examples)
+### Step 3: Asking Questions
+
+Once you've opened a Wikipedia article, you can begin interacting with the bot. Here's how it works:
+
+#### 1. Bot Reads the Article
+
+When you ask your first question, the bot will automatically read and process the article in the background. Simply input your query, and the bot will use the content of the article to answer.
+
+![Reading Article](assets/read.gif)
+
+#### 2. Bot Answers Your Question
+
+After processing the article, the bot will respond with answers based on the article's content. You can ask follow-up questions, and the bot will continue to reference the same article for context.
+
+![Asking Questions](assets/communicate.gif)
+
+Now, you're ready to explore Wikipedia with the power of automated, contextual Q&A!
+
+## Developer Guide
+
+For advanced usage and instructions on running the service locally, refer to the [Developer Guide](examples/README.md).

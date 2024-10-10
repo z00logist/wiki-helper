@@ -32,9 +32,9 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
             host=connection_settings.host, port=connection_settings.port
         )
         self.__collection_name = uuid.uuid4().hex
-        self.__splitter = SemanticSplitterNodeParser(
-            buffer_size=25,
-            breakpoint_percentile_threshold=80,
+        self.__semantic_splitter = SemanticSplitterNodeParser(
+            buffer_size=2,
+            breakpoint_percentile_threshold=60,
             embed_model=self.__embedding_function,
         )
 
@@ -50,8 +50,9 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
             else:
                 logger.info(f"Storing in a new collection: {self.__collection_name}")
 
-            document = Document(text=content)
-            nodes = self.__splitter.get_nodes_from_documents([document])
+            document = Document(text=content, id_=uuid.uuid4().hex)
+
+            nodes = self.__semantic_splitter.get_nodes_from_documents([document])
 
             texts = [node.get_content() for node in nodes]
 
@@ -91,7 +92,11 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
                 for document in subdocuments
             ]
 
-            logger.info(f"Retrieved {len(flat_documents)} documents for the query.")
+            for number, flat_document in enumerate(flat_documents):
+                logger.debug(
+                    f"Document {number+1}: Length = {len(flat_document)} characters"
+                )
+
             return [str(flat_document) for flat_document in flat_documents]
 
         except ChromaError as error:
