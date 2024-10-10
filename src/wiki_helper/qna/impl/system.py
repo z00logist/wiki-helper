@@ -29,7 +29,7 @@ class StreamingRagSystemImpl(RagSystem[t.Generator[str, None, None]]):
             content = self.__knowledge_base.get_content(location)
 
             logger.debug(
-                f"Content retrieved from knowledge base for '{location}': {content[:10]}..."
+                f"Content retrieved from knowledge base for '{location}': content length -- {len(content)}."
             )
 
             self.__storage.store(content)
@@ -47,11 +47,13 @@ class StreamingRagSystemImpl(RagSystem[t.Generator[str, None, None]]):
             logger.warning("Empty query received.")
 
             yield "Sorry, I can't help you with an empty query."
+
             return
         try:
             context = self.__storage.get(query)
 
             logger.debug(f"Retrieved context for query: '{context}'")
+
             for token in self.__generator.generate(
                 QnAContext(query=query, context=context)
             ):
