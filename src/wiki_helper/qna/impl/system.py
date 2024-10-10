@@ -12,10 +12,10 @@ from wiki_helper.storing.storage import Storage, StorageError
 logger = logging.getLogger(__name__)
 
 
-class StreamingRagSystemImpl(RagSystem[t.Generator[str, None, None]]):
+class StreamingRagSystem(RagSystem[t.Iterator[str]]):
     def __init__(
         self,
-        generator: GenerativeModel[QnAContext, t.Generator[str, None, None]],
+        generator: GenerativeModel[QnAContext, t.Iterator[str]],
         knowledge_base: KnowledgeBase[URL, str],
         storage: Storage[str, t.Sequence[str]],
     ) -> None:
@@ -40,7 +40,7 @@ class StreamingRagSystemImpl(RagSystem[t.Generator[str, None, None]]):
                 f"Failed to train QnA System due to error '{error}'"
             ) from error
 
-    def answer(self, query: str) -> t.Generator[str, None, None]:
+    def answer(self, query: str) -> t.Iterator[str]:
         logger.info(f"Answering query: '{query}'")
 
         if len(query) == 0:

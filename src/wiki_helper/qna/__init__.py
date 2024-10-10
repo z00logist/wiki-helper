@@ -7,7 +7,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from wiki_helper.configuration import Configuration
 from wiki_helper.qna.impl.generative_model import StreamingLanguageModel
 from wiki_helper.qna.impl.knowledge_base import ExternalKnowledgeBase
-from wiki_helper.qna.impl.system import StreamingRagSystemImpl
+from wiki_helper.qna.impl.system import StreamingRagSystem
 from wiki_helper.qna.system import RagSystem
 from wiki_helper.storing.impl.storage import VectorStorage, VectorStorageConnection
 
@@ -22,8 +22,8 @@ def build_embedding_creator(embedder_location: pth.Path) -> BaseEmbedding:
 
 def build_system(
     configuration: Configuration,
-) -> RagSystem[t.Generator[str, None, None]]:
-    return StreamingRagSystemImpl(
+) -> RagSystem[t.Iterator[str]]:
+    return StreamingRagSystem(
         generator=StreamingLanguageModel(model_location=configuration.llm.location),
         knowledge_base=ExternalKnowledgeBase(configuration.language),
         storage=VectorStorage(

@@ -17,7 +17,7 @@ class QnAContext:
     context: t.Sequence[str]
 
 
-class StreamingLanguageModel(GenerativeModel[QnAContext, t.Generator[str, None, None]]):
+class StreamingLanguageModel(GenerativeModel[QnAContext, t.Iterator[str]]):
     def __init__(self, model_location: pth.Path) -> None:
         logger.info(f"Initializing model from location: '{model_location}'")
         self.__model = LlamaCpp(
@@ -47,7 +47,7 @@ class StreamingLanguageModel(GenerativeModel[QnAContext, t.Generator[str, None, 
             ),
         )
 
-    def generate(self, prompt_data: QnAContext) -> t.Generator[str, None, None]:
+    def generate(self, prompt_data: QnAContext) -> t.Iterator[str]:
         logger.info(f"Generating answer for query: '{prompt_data.query}'")
 
         if len(prompt_data.query) == 0 or len(prompt_data.context) == 0:
