@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "Local Wikipedia Chatbot",
+    "version": "1.0.0",
+    "description": "Injects a local chatbot widget into Wikipedia pages.",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "scripting",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "http://localhost:8080/*",
+        "https://*.wikipedia.org/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://*.wikipedia.org/wiki/*"],
+            "js": [
+                "scripts/ui.js",
+                "scripts/dragResize.js",
+                "scripts/network.js",
+                "scripts/events.js",
+                "scripts/main.js"
+            ],
+            "css": ["styles/style.css"],
+            "run_at": "document_end"
+        }
+    ]
+}
