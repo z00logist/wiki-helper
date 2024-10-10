@@ -37,7 +37,7 @@ Request parameters:
 For example: 
 ```curl -X POST "http://0.0.0.0:8080/inference/answer" -H "Content-Type: application/json" -d "{\"question\": \"What is Python?\"}"```
 
-## Via Jupter Notebook
+## Via Jupyter Notebook
 ### Preparation
 
 1. Install environment ```poetry install --no-root```  
