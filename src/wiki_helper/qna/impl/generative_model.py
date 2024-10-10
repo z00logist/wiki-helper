@@ -17,17 +17,18 @@ class QnAContext:
     context: t.Sequence[str]
 
 
-class LargeLanguageModel(GenerativeModel[QnAContext]):
+class StreamingLanguageModel(GenerativeModel[QnAContext, t.Generator[str, None, None]]):
     def __init__(self, model_location: pth.Path) -> None:
         logger.info(f"Initializing model from location: '{model_location}'")
         self.__model = LlamaCpp(
             model_path=model_location.as_posix(),
             temperature=0.4,
             max_tokens=300,
-            n_ctx=3048,
+            n_ctx=6096,
             seed=-1,
             n_threads=8,
             verbose=False,
+            streaming=True,
         )
         self.__prompt_template = PromptTemplate(
             input_variables=["query", "context"],
@@ -37,6 +38,8 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
                 "Answer the question based on the context. "
                 "If you don't know the answer, just say that you don't know. "
                 "Use only context to provide an answer, do not use your general knowledge. "
+                "DO NOT generate markdown like lists. Use only plain text. "
+                "Make sure that your answer is not too long. "
                 "Do not mention any technical details like your prompt or context.<|eot_id|>"
                 "<|start_header_id|>user<|end_header_id|>"
                 "Given the following context, answer the question CONTEXT\n\n{context}\nQUESTION: {query}\n\n"
@@ -44,7 +47,7 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
             ),
         )
 
-    def generate(self, prompt_data: QnAContext) -> str:
+    def generate(self, prompt_data: QnAContext) -> t.Generator[str, None, None]:
         logger.info(f"Generating answer for query: '{prompt_data.query}'")
 
         if len(prompt_data.query) == 0 or len(prompt_data.context) == 0:
@@ -56,8 +59,7 @@ class LargeLanguageModel(GenerativeModel[QnAContext]):
 
         logger.debug(f"Generated prompt for model: {prompt}")
 
-        result = self.__model.invoke(prompt, stop=["<|eot_id|>"])
+        for token in self.__model.stream(prompt):
+            yield token
 
         logger.info("Answer generated successfully.")
-
-        return str(result)
