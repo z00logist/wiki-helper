@@ -6,4 +6,5 @@ from wiki_helper.configuration import Configuration
 
 if __name__ == "__main__":
     service = initialize_service(configuration=Configuration())
-    uvicorn.run(service, host="0.0.0.0", port=8080)
+
+    uvicorn.run(service, host="localhost", port=8080)
