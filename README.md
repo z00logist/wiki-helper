@@ -11,19 +11,18 @@ Wiki Helper Widget is a Q&A bot designed specifically for Wikipedia. It allows y
 - This widget only works within **Wikipedia** pages.
 - Currently, it supports only **English language** Q&A.
 
-
 ## Installation Guide
 
 ### Step 0: Run the service
-1. Clone this repository on you compiter.
-2. Prepare your env via ```make prepare```
-3. Run the service via ```make run```
+1. Clone this repository on your computer.
+2. Prepare your environment via `make prepare`.
+3. Run the service via `make run`.
 
 ### Step 1: Install the Chrome Extension
 
 1. Open Chrome and go to the `Extensions` page by typing `chrome://extensions/` in your address bar.
 2. Turn on **Developer mode** (toggle in the top right corner).
-3. Click **Load unpacked** and select the folder in this project [widget extension](widget_extension)
+3. Click **Load unpacked** and select the folder in this project [widget extension](widget_extension).
 4. You should now see the Wiki Helper icon in your Chrome toolbar.
 
 ### Step 2: Using the Widget
@@ -35,14 +34,21 @@ Wiki Helper Widget is a Q&A bot designed specifically for Wikipedia. It allows y
 
 ### Step 3: Asking Questions
 
-1. Once you’ve opened a Wikipedia article, you can immediately start asking questions about the article content.
-2. Simply type your question in the chat box and press **Enter** or **Send** button.
-3. The bot will automatically read and process the article, then respond with relevant answers based on the article's content.
+Once you've opened a Wikipedia article, you can begin interacting with the bot. Here's how it works:
 
-![Asking Questions](assets/read.gif)
+#### 1. Bot Reads the Article
+
+When you ask your first question, the bot will automatically read and process the article in the background. Simply input your query, and the bot will use the content of the article to answer.
+
+![Reading Article](assets/read.gif)
+
+#### 2. Bot Answers Your Question
+
+After processing the article, the bot will respond with answers based on the article's content. You can ask follow-up questions, and the bot will continue to reference the same article for context.
 
 ![Asking Questions](assets/communication.gif)
 
+Now, you're ready to explore Wikipedia with the power of automated, contextual Q&A!
 
 ## Developer Guide
 
