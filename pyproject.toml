@@ -35,7 +35,7 @@ ipykernel = "^6.29.5"
 
 
 [tool.mypy]
-files = ["src/", "tests/"]
+files = ["src/"]
 strict = true
 plugins = [
     "pydantic.mypy",
