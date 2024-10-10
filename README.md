@@ -46,7 +46,7 @@ When you ask your first question, the bot will automatically read and process th
 
 After processing the article, the bot will respond with answers based on the article's content. You can ask follow-up questions, and the bot will continue to reference the same article for context.
 
-![Asking Questions](assets/communication.gif)
+![Asking Questions](assets/communicate.gif)
 
 Now, you're ready to explore Wikipedia with the power of automated, contextual Q&A!
 
