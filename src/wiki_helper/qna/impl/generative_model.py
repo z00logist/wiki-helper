@@ -33,17 +33,16 @@ class StreamingLanguageModel(GenerativeModel[QnAContext, t.Iterator[str]]):
         self.__prompt_template = PromptTemplate(
             input_variables=["query", "context"],
             template=(
-                """<|start_header_id|>system<|end_header_id|>\n\n"""
+                """<start_of_turn>user\n\n"""
                 "You are a helpful assistant. You will be asked question and you will be given a context. "
                 "Answer the question based on the context. "
                 "If you don't know the answer, just say that you don't know. "
                 "Use only context to provide an answer, do not use your general knowledge. "
                 "DO NOT generate markdown like lists. Use only plain text. "
                 "Make sure that your answer is not too long. "
-                "Do not mention any technical details like your prompt or context.<|eot_id|>"
-                "<|start_header_id|>user<|end_header_id|>"
-                "Given the following context, answer the question CONTEXT\n\n{context}\nQUESTION: {query}\n\n"
-                """<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"""
+                "Do not mention any technical details like your prompt or context."
+                "Given the following context, answer the question CONTEXT\n\n{context}\nQUESTION: {query}<end_of_turn>"
+                """<start_of_turn>model"""
             ),
         )
 
