@@ -1,4 +1,4 @@
-.PHONY: run clean
+.PHONY: run clean prepare
 
 export PYTHONPATH := src
 
@@ -13,9 +13,9 @@ clean:
 
 prepare:
 	@echo "Creating virtual environment..."
-	virtualenv -p $(which python3.12) .venv
+	virtualenv -p $(shell which python3.12) .venv
 	@echo "Activating virtual environment..."
-	@source .venv/bin/activate && \
+	@. .venv/bin/activate && \
 		echo "Installing environment with Poetry..." && \
 		poetry install --no-root && \
 		echo "Downloading baseline models..." && \
