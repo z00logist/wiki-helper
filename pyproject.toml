@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "wiki_helper"}]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 yarl = "^1.11.1"
 wikipedia-api = "^0.7.1"
 boto3 = "^1.35.24"
@@ -25,13 +25,15 @@ ipywidgets = "^8.1.5"
 fastapi = "^0.115.0"
 protobuf = "3.20.0"
 uvicorn = "^0.31.0"
-
+numpy = "1.26.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.7"
 pytest = "^8.3.3"
 mypy = "^1.11.2"
 ipykernel = "^6.29.5"
+datasets = "^3.0.1"
+bert-score = "^0.3.13"
 
 
 [tool.mypy]
