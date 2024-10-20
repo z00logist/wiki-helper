@@ -24,6 +24,15 @@ The current concept is simple:
 2. Run chromadb ```docker compose up -d```
 3. Run service ```python -m wiki_helper```
 
+#### GPU Inference
+If you want to run LLM on your GPU, you need to follow this instruction after venv preparations:
+1. ```export CMAKE_ARGS="-DGGML_CUDA=on"```
+2. ```export FORCE_CMAKE=1"```
+3. ```poetry run pip install --no-cache-dir --force-reinstall llama-cpp-python```
+ 
+Also, in [generative model](../src/wiki_helper/qna/impl/generative_model.py) you can change n_gpu_layers paramater according to your specifications.
+
+
 ### Use Service
 #### Train
 You need to request api methods training/train and provide it with the json containing url of wikipedia article.
