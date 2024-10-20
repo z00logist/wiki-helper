@@ -63,3 +63,39 @@ class StreamingLanguageModel(GenerativeModel[QnAContext, t.Iterator[str]]):
             yield token
 
         logger.info("Answer generated successfully.")
+
+
+class LanguageModel(GenerativeModel[QnAContext, str]):
+    def __init__(self, model_location: pth.Path, prompt: str) -> None:
+        logger.info(f"Initializing model from location: '{model_location}'")
+        self.__model = LlamaCpp(
+            model_path=model_location.as_posix(),
+            temperature=0.4,
+            max_tokens=300,
+            n_ctx=3048,
+            seed=-1,
+            n_threads=8,
+            verbose=False,
+        )
+        self.__prompt_template = PromptTemplate(
+            input_variables=["query", "context"],
+            template=prompt,
+        )
+
+    def generate(self, prompt_data: QnAContext) -> str:
+        logger.info(f"Generating answer for query: '{prompt_data.query}'")
+
+        if len(prompt_data.query) == 0 or len(prompt_data.context) == 0:
+            raise GenerativeModelError("Empty query or context")
+
+        prompt = self.__prompt_template.format(
+            query=prompt_data.query, context=prompt_data.context
+        )
+
+        logger.debug(f"Generated prompt for model: {prompt}")
+
+        result = self.__model.invoke(prompt, stop=["<|eot_id|>"])
+
+        logger.info("Answer generated successfully.")
+
+        return str(result)
