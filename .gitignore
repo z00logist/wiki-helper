@@ -8,3 +8,5 @@ mypy_cache/
 
 models/
 chromadb/
+
+research/data
