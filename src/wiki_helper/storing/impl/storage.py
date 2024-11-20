@@ -80,7 +80,7 @@ class VectorStorage(Storage[str, t.Sequence[str]]):
             query_embedding = self.__embedding_function.get_query_embedding(query)
 
             results = chroma_collection.query(
-                query_embeddings=query_embedding, n_results=self.__num_neighbors
+                query_embeddings=query_embedding, n_results=self.__num_neighbors,
             )
             if results["documents"] is None:
                 logger.info("No results found for the query.")
